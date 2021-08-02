@@ -27,7 +27,7 @@ const localDB = "mongodb://localhost:27017/campgrounds";
 const serverDB = process.env.DB_URL || localDB;
 
 const secret = process.env.SECRET || "thisIsLocalDevSecret";
-mongoose.connect(localDB, {
+mongoose.connect(serverDB, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
@@ -164,6 +164,8 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error", { message });
 });
 
-app.listen(8000, () => {
-  console.log("Listening on Port 8000");
+const port = process.senv.PORT || 8000;
+
+app.listen(port, () => {
+  console.log(`Listening on Port ${port}`);
 });
