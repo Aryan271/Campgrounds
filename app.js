@@ -51,7 +51,7 @@ app.use(methodOverride("_method"));
 app.use(express.static("public"));
 
 const store = new MongoStore({
-  mongoUrl: localDB,
+  mongoUrl: serverDB,
   touchAfter: 24 * 60 * 60,
   crypto: {
     secret,
