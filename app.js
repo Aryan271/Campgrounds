@@ -26,7 +26,6 @@ const localDB = "mongodb://localhost:27017/campgrounds";
 // server DB_URL
 const serverDB = process.env.DB_URL || localDB;
 
-const secret = process.env.SECRET || "thisIsLocalDevSecret";
 mongoose.connect(serverDB, {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -48,7 +47,14 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  mongoSanitize({
+    replaceWith: "_",
+  })
+);
+
+const secret = process.env.SECRET || "thisIsLocalDevSecret";
 
 const store = new MongoStore({
   mongoUrl: serverDB,
@@ -77,7 +83,6 @@ const sessionConfig = {
 };
 
 app.use(session(sessionConfig));
-
 app.use(flash());
 app.use(helmet({ contentSecurityPolicy: false }));
 
@@ -144,15 +149,13 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(mongoSanitize());
+app.use("/", authRoutes);
+app.use("/campgrounds", campgroundsRoutes);
+app.use("/campgrounds/:id/reviews", reviewsRoutes);
 
 app.get("/", (req, res) => {
   res.render("home");
 });
-
-app.use("/", authRoutes);
-app.use("/campgrounds", campgroundsRoutes);
-app.use("/campgrounds/:id/reviews", reviewsRoutes);
 
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page not found!", 404));
