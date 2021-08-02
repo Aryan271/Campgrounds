@@ -1,0 +1,35 @@
+.alertBox {
+  position: relative;
+  align-items: flex-end;
+  margin: 0;
+}
+
+.flash-message {
+  z-index: 1;
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 2px 5px;
+  padding: 1px 2px;
+  right: 0;
+  top: 0;
+}
+
+@media (min-width: 500px) {
+  .flash-message {
+    width: 50%;
+    min-width: fit-content;
+  }
+}
+
+@media (min-width: 900px) {
+  .flash-message {
+    width: 40%;
+  }
+}
+
+.hide {
+  display: none;
+  opacity: 0;
+}
