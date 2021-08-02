@@ -57,11 +57,9 @@ app.use(
 const secret = process.env.SECRET || "thisIsLocalDevSecret";
 
 const store = new MongoStore({
-  mongoUrl: serverDB,
+  url: serverDB,
+  secret,
   touchAfter: 24 * 60 * 60,
-  crypto: {
-    secret,
-  },
 });
 
 store.on("error", function (e) {
