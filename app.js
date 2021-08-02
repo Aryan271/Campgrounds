@@ -18,7 +18,7 @@ const localStrategy = require("passport-local");
 const User = require("./models/user");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
-const MongoStore = require("connect-mongo");
+const MongoStore = require("connect-mongo")(session);
 
 // local DB_URL
 const localDB = "mongodb://localhost:27017/campgrounds";
