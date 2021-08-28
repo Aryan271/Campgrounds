@@ -4,7 +4,7 @@
 
 A complete dynamic website that lets you create comment and review campgrounds.You can view the final Deployed website here [website] : https://damp-plains-68441.herokuapp.com/ It's deployed on heroku so might take some time to load. Thank you for your patience!!
 
-### Tech Srack used
+### Tech Stack used
 #### Fronted
 - HTML 
 - CSS
