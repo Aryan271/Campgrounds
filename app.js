@@ -54,7 +54,7 @@ app.use(
   })
 );
 
-const secret = process.env.SECRET || "thisissecret";
+const secret = process.env.SECRET;
 
 const store = new MongoStore({
   url: serverDB,
